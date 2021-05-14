@@ -136,16 +136,22 @@ function Await(props: AwaitComponentProps) {
         }
     }, [loading, timePassed, expired, completed]);
 
-    const finalState = (image, message) => (
-        <div className="adyen-checkout__await adyen-checkout__await--result">
-            <img
-                className="adyen-checkout__await__icon adyen-checkout__await__icon--result"
-                src={getImageUrl({ loadingContext, imageFolder: 'components/' })(image)}
-                alt={i18n.get(message)}
-            />
-            <div className="adyen-checkout__await__subtitle adyen-checkout__await__subtitle--result">{i18n.get(message)}</div>
-        </div>
-    );
+    const finalState = (image, message) => {
+        if (props.showFinalState) {
+            return (
+                <div className="adyen-checkout__await adyen-checkout__await--result">
+                    <img
+                        className="adyen-checkout__await__icon adyen-checkout__await__icon--result"
+                        src={getImageUrl({ loadingContext, imageFolder: 'components/' })(image)}
+                        alt={i18n.get(message)}
+                    />
+                    <div className="adyen-checkout__await__subtitle adyen-checkout__await__subtitle--result">{i18n.get(message)}</div>
+                </div>
+            );
+        }
+
+        return null;
+    };
 
     if (expired) {
         return finalState('error', 'error.subtitle.payment');
@@ -218,7 +224,8 @@ Await.defaultProps = {
     showCountdownTimer: true,
     classNameModifiers: [],
     shouldRedirectOnMobile: false,
-    url: null
+    url: null,
+    showFinalState: true
 };
 
 export default Await;

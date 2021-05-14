@@ -23,6 +23,11 @@ export interface QRLoaderProps {
     introduction?: string;
     instructions?: string;
     copyBtn?: boolean;
+
+    /**
+     * Automatically show/hide a final success/error state once the payment is completed
+     */
+    showFinalState?: boolean;
 }
 
 export interface QRLoaderState {

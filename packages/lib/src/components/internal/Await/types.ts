@@ -27,4 +27,5 @@ export interface AwaitComponentProps {
     messageText: string;
     awaitText: string;
     ref: any;
+    showFinalState?: boolean;
 }

@@ -42,7 +42,8 @@ class QRLoader extends Component<QRLoaderProps, QRLoaderState> {
         throttleTime: 60000,
         classNameModifiers: [],
         throttledInterval: 10000,
-        introduction: 'wechatpay.scanqrcode'
+        introduction: 'wechatpay.scanqrcode',
+        showFinalState: true
     };
 
     // Retry until getting a complete response from the server or it times out\
@@ -149,19 +150,24 @@ class QRLoader extends Component<QRLoaderProps, QRLoaderState> {
             });
     }
 
-    render({ amount, url, brandLogo, countdownTime, i18n, loadingContext, type }: QRLoaderProps, { expired, completed, loading }) {
+    render({ amount, url, brandLogo, countdownTime, i18n, loadingContext, type, showFinalState }: QRLoaderProps, { expired, completed, loading }) {
         const qrCodeImage = this.props.qrCodeData ? `${loadingContext}${QRCODE_URL}${this.props.qrCodeData}` : this.props.qrCodeImage;
 
-        const finalState = (image, message) => (
-            <div className="adyen-checkout__qr-loader adyen-checkout__qr-loader--result">
-                <img
-                    className="adyen-checkout__qr-loader__icon adyen-checkout__qr-loader__icon--result"
-                    src={getImageUrl({ loadingContext, imageFolder: 'components/' })(image)}
-                    alt={i18n.get(message)}
-                />
-                <div className="adyen-checkout__qr-loader__subtitle adyen-checkout__qr-loader__subtitle--result">{i18n.get(message)}</div>
-            </div>
-        );
+        const finalState = (image, message) => {
+            if (showFinalState) {
+                return (
+                    <div className="adyen-checkout__qr-loader adyen-checkout__qr-loader--result">
+                        <img
+                            className="adyen-checkout__qr-loader__icon adyen-checkout__qr-loader__icon--result"
+                            src={getImageUrl({ loadingContext, imageFolder: 'components/' })(image)}
+                            alt={i18n.get(message)}
+                        />
+                        <div className="adyen-checkout__qr-loader__subtitle adyen-checkout__qr-loader__subtitle--result">{i18n.get(message)}</div>
+                    </div>
+                );
+            }
+            return null;
+        };
 
         if (expired) {
             return finalState('error', 'error.subtitle.payment');

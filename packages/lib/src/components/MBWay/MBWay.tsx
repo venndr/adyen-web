@@ -63,6 +63,7 @@ export class MBWayElement extends UIElement {
                         countdownTime={config.COUNTDOWN_MINUTES}
                         throttleTime={config.THROTTLE_TIME}
                         throttleInterval={config.THROTTLE_INTERVAL}
+                        showFinalState={this.props.showFinalState}
                     />
                 </CoreProvider>
             );
