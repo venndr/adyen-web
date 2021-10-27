@@ -1,4 +1,3 @@
-import typescript from 'rollup-plugin-typescript2';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import json from '@rollup/plugin-json';
@@ -8,7 +7,9 @@ import eslint from '@rollup/plugin-eslint';
 import babel from '@rollup/plugin-babel';
 import terserConfig from './terser.config';
 import pkg from '../package.json';
-import { DEFAULT_EXTENSIONS } from '@babel/core';
+import typescript from "rollup-plugin-typescript2";
+
+const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 const currentVersion = require('./version')();
 
@@ -35,7 +36,7 @@ const watchConfig = {
 
 async function getPlugins({ compress, analyze, version, useTypescript = true }) {
     return [
-        resolve(),
+        resolve({ extensions }),
         commonjs(),
         eslint({
             include: ['./src/**'],
@@ -63,9 +64,10 @@ async function getPlugins({ compress, analyze, version, useTypescript = true }) 
                 target: 'es2017'
             }),
         babel({
-            extensions: [...DEFAULT_EXTENSIONS, 'ts', 'tsx'],
-            exclude: ['node_modules/**', '**/*.test.*'],
-            ignore: [/core-js/, /@babel\/runtime/],
+            extensions,
+            include: ['src/**/*'],
+            // exclude: ['node_modules/**', '**/*.test.*'],
+            //ignore: [/core-js/, /@babel\/runtime/],
             presets: [
                 [
                     '@babel/preset-env',
@@ -75,7 +77,7 @@ async function getPlugins({ compress, analyze, version, useTypescript = true }) 
                             ie: '11'
                         }
                     }
-                ]
+                ],
             ],
             babelHelpers: 'runtime',
             plugins: [

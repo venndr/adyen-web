@@ -5,13 +5,17 @@
 
         "moduleResolution": "node",
         "module": "esnext",
-        "target": "es2017",
+        "target": "esnext",
         "jsx": "react",
         "jsxFactory": "h",
         "resolveJsonModule": true,
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
 
+        "allowJs": true,
+        "noEmit": true,
+
+        "strictNullChecks": true,
         "noImplicitAny": false,
         "strictPropertyInitialization": false,
         "suppressImplicitAnyIndexErrors": true,
@@ -19,7 +23,7 @@
 
         "importHelpers": true,
 
-        "sourceMap": true,
+        "sourceMap": false,
         "baseUrl": "./"
     },
     "include": ["src/"],
