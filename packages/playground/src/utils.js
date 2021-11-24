@@ -5,7 +5,8 @@ export const httpPost = (endpoint, data) =>
         method: 'POST',
         headers: {
             Accept: 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'x-API-key': process.env.__CHECKOUT_API_KEY__
         },
         body: JSON.stringify(data)
     }).then(response => response.json());

@@ -5,6 +5,7 @@ import { amount, shopperLocale, shopperReference, countryCode, returnUrl } from 
 
 export async function initSession() {
     const session = await createSession({
+        merchantAccount: process.env.__MERCHANT_ACCOUNT__,
         amount,
         reference: 'ABC123',
         returnUrl,

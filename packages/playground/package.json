@@ -21,7 +21,7 @@
         "dev-server": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js"
     },
     "devDependencies": {
-        "@adyen/adyen-web-server": "1.0.0",
+        "@adyen/adyen-web": "5.2.2",
         "autoprefixer": "^10.3.6",
         "core-js": "^3.18.1",
         "cross-env": "^7.0.3",

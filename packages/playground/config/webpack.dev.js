@@ -48,7 +48,9 @@ module.exports = merge(webpackConfig, {
             'process.env': {
                 __SF_ENV__: JSON.stringify(process.env.SF_ENV || 'build'),
                 __CLIENT_KEY__: JSON.stringify(process.env.CLIENT_KEY || null),
-                __CLIENT_ENV__: JSON.stringify(process.env.CLIENT_ENV || 'test')
+                __CLIENT_ENV__: JSON.stringify(process.env.CLIENT_ENV || 'test'),
+                __MERCHANT_ACCOUNT__: JSON.stringify(process.env.MERCHANT_ACCOUNT || 'TestMerchant'),
+                __CHECKOUT_API_KEY__: JSON.stringify(process.env.CHECKOUT_API_KEY || null)
             }
         })
     ],
